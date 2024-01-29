@@ -29,4 +29,3 @@ public:
     float m_green;
     float m_blue;
 };
-

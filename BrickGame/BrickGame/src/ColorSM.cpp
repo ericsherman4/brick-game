@@ -2,11 +2,11 @@
 
 ColorSM::ColorSM(float color_speed)
     : m_color_speed(color_speed)
-    , m_red(0.f)
-    , m_green(255.f)
-    , m_blue(255.f)
-    , m_curr_state(State::FALLING_G)
-    , m_next_state(State::FALLING_G)
+    , m_red(255.f)
+    , m_green(0.f)
+    , m_blue(0.f)
+    , m_curr_state(State::RISING_G)
+    , m_next_state(State::RISING_G)
 {
 }
 
@@ -71,8 +71,8 @@ void ColorSM::Run()
 sf::Color ColorSM::GetColor()
 {
     return sf::Color(
-        (float)m_red,
-        (float)m_green,
-        (float)m_blue
+        (uint8_t)m_red,
+        (uint8_t)m_green,
+        (uint8_t)m_blue
     );
 }
