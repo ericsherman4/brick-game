@@ -19,11 +19,11 @@ public:
         static float t = 0.f;
 
         t += m_ANIM_SPEED;
-        std::cout << t << ": " << m_green << std::endl;
 
-        if (t > FULL_CYCLE_TIME){ t = 0.f; }
+        t = (t <= FULL_CYCLE_TIME) * t;
 
         // implement piecewise functions from the fastLED "rainbow" hue chart.
+        // challenge: use no if statements.
 
         m_red =
             (t < 85.f) * (-t + 255.f) +
@@ -31,6 +31,7 @@ public:
             (170.f <= t && t < 255.f) * (-2.f * t + 510.f) +
             (255.f <= t && t < 425.f) * (0.f) +
             (425.f <= t && t < 680.f) * (t - 425.f );
+
 
         m_green =
             (t < 255.f) * (t) +
@@ -47,6 +48,10 @@ public:
 
     sf::Color GetColor()
     {
+        m_red = (m_red <= 255.f) * m_red + (m_red > 255.f) * 255.f;
+        m_green = (m_green <= 255.f) * m_green + (m_green > 255.f) * 255.f;
+        m_blue = (m_blue <= 255.f) * m_blue + (m_blue > 255.f) * 255.f;
+
         return { (uint8_t)m_red, (uint8_t)m_green, (uint8_t)m_blue };
     }
 
